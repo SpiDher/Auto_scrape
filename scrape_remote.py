@@ -23,5 +23,10 @@ def get_jobs():
     response = requests.get(base_url,headers = request_header)
     return json.dumps(response.json(), indent = 2)
     
+def spread(response):
+    wb = Workbook()
+    job_sheet = wb.add_sheet('Tetsing')
+    headers = list(response[0].keys())
+    
 if __name__ == '__main__':
     main()
