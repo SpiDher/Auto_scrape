@@ -26,14 +26,24 @@ def get_jobs():
 def spread(response):
     wb = Workbook()
     job_sheet = wb.add_sheet('Testing')
+    
+    # Extract headers from the first job in the response
     headers = list(response[0].keys())
-    for i in range(0,len(headers)):
-        job_sheet.write(0,i,headers[i])
-    for i in range(0,len(response)):
+    
+    # Write headers
+    for i in range(len(headers)):
+        job_sheet.write(0, i, headers[i])
+    
+    # Write job data
+    for i in range(len(response)):
         jobs = response[i]
-        value = list(jobs.values())
-        for x in range(0,len(value)):
-            job_sheet.write(i+1,x,str(value))
+        values = list(jobs.values())
+        
+        for x in range(len(values)):
+            job_sheet.write(i + 1, x, str(values[x])[:32767])
+    
     wb.save('remoteok.xls')
+
+
 if __name__ == '__main__':
     main()
