@@ -43,6 +43,20 @@ def spread(response):
     
     wb.save('remoteok.xls')
 
-
+email_params = {
+    'send_to':['penivera655@gmail.com'],
+    'send_from': 'charlesocean2023@gmail.com',
+    'subject':'TEstin smtp servers',
+    'text': 'This is a simple test of gmail smtp server',
+    'files': None
+    }
+def send_email(send_to,send_from,subject,text,files):
+    assert isinstance(send_to,list)
+    msg = MIMEMultipart()
+    msg['From']= send_from
+    msg['To']= COMMASPACE.join(send_to)
+    msg['Date']= formatdate(localtime=True)
+    smtp = smtplib.SMTP('smtp.gmail.com: 587')
+    smtp.starttls()
 if __name__ == '__main__':
     main()
